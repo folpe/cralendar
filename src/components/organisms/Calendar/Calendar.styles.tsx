@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 const CalendarWrapper = styled.div`
-  width: 25em;
+  width: 50em;
 
   & .calendarActionsWrapper {
     display: flex;

@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react'
 import { Calendar } from '../components/organisms/Calendar'
-import { addMonths } from 'date-fns'
 import { holidays } from './assets/holidays'
 
 // More on how to set up stories at: https://storybook.js.org/docs/writing-stories#default-export
@@ -22,15 +21,15 @@ type Story = StoryObj<typeof meta>
 
 // More on writing stories with args: https://storybook.js.org/docs/writing-stories/args
 export const Default: Story = {}
-export const Previous: Story = {
+export const ByDate: Story = {
   args: {
-    date: addMonths(new Date(), 1),
+    date: new Date('2024-12-12'),
   },
 }
 
-export const startsOn: Story = {
+export const startsOnSunday: Story = {
   args: {
-    weekStartsOn: 1,
+    weekStartsOn: 0,
   },
 }
 

@@ -1,17 +1,8 @@
 import {
   Day,
   addMonths,
-  eachDayOfInterval,
-  eachWeekOfInterval,
-  endOfISOWeek,
-  endOfMonth,
-  format,
   isSameDay,
-  isSameMonth,
-  isToday,
-  isWeekend,
   setDefaultOptions,
-  startOfISOWeek,
   startOfMonth,
   subMonths,
 } from 'date-fns'
@@ -23,66 +14,59 @@ import { WeekDays } from '../../molecules/WeekDays'
 import { DayCell } from '../../atoms/DayCell'
 import { Global, ThemeProvider, css } from '@emotion/react'
 import { theme } from '../../../theme/theme'
+import { CraHeader } from '../../molecules/CraHeader'
+import {
+  monthByWeeksDaysMapper,
+  monthMapper,
+  monthStartEndMapper,
+  setCalendarDataValue,
+  setDayValue,
+} from './Calendar.helpers'
+
 setDefaultOptions({ locale: fr })
+export interface CalendarData {
+  date: Date
+  value: number | null
+  isToday: boolean
+  isWeekend: boolean
+  isOtherMonth: boolean
+  holiday: string | null
+}
+
+export interface Holidays {
+  [key: string]: string
+}
 
 type CalendarProps = {
   date?: Date
-  weekStartsOn?: Day
+  weekStartsOn?: number
   displayWeekDays?: boolean
-  holidays?: { [key: string]: string }
+  holidays?: Holidays
 }
 
 const Calendar: React.FC<CalendarProps> = ({
   date = new Date(),
-  weekStartsOn = 1,
+  weekStartsOn = 1 as Day,
   displayWeekDays = true,
   holidays,
 }) => {
-  const [calendarData, setCalendarData] = useState<dayProps[]>([])
-  const [monthYearDate, setMonthYearDate] = useState<Date>(date)
-  const monthStartEnd = useMemo(
-    () => ({
-      start: startOfMonth(monthYearDate),
-      end: endOfMonth(monthYearDate),
-    }),
-    [monthYearDate]
-  )
-  console.log('monthStartEnd', monthStartEnd)
-  const monthWeeksInterval = useMemo(
-    () =>
-      eachWeekOfInterval(monthStartEnd, { weekStartsOn }).flatMap((weekDay) =>
-        eachDayOfInterval({
-          start: startOfISOWeek(weekDay),
-          end: endOfISOWeek(weekDay),
-        })
-      ),
-    [monthStartEnd, weekStartsOn]
-  )
+  const [calendarData, setCalendarData] = useState<CalendarData[]>([])
+  const [monthToDisplayDate, setMonthToDisplayDate] = useState<Date>(date)
 
-  const setHoliday = (
-    holidaysArr: { [key: string]: string },
-    dayDate: Date
-  ) => {
-    if (!holidaysArr) return null
-    const isHoliday = Object.keys(holidaysArr).some((date: string) =>
-      isSameDay(new Date(date), dayDate)
-    )
-    const formatedDayDate: string = format(dayDate, 'yyyy-MM-dd')
-    return isHoliday ? holidaysArr[formatedDayDate] : null
-  }
+  const monthByWeeksDaysArr = useMemo(
+    () =>
+      monthByWeeksDaysMapper(
+        monthStartEndMapper(monthToDisplayDate),
+        weekStartsOn
+      ),
+    [monthToDisplayDate, weekStartsOn]
+  )
 
   const mappedMonth = useMemo(
-    () =>
-      monthWeeksInterval.map((dayDate) => ({
-        date: dayDate,
-        value: null,
-        isToday: isToday(dayDate),
-        isWeekend: isWeekend(dayDate),
-        isOtherMonth: !isSameMonth(monthYearDate, dayDate),
-        holiday: setHoliday(holidays!, dayDate),
-      })),
-    [monthYearDate, monthWeeksInterval]
+    () => monthMapper(monthByWeeksDaysArr, holidays!, monthToDisplayDate),
+    [monthToDisplayDate, monthByWeeksDaysArr, holidays]
   )
+
   useEffect(() => {
     setCalendarData(mappedMonth)
 
@@ -91,50 +75,31 @@ const Calendar: React.FC<CalendarProps> = ({
     }
   }, [mappedMonth])
 
-  const setCalendarValue = (data: dayProps[], value: number | null) =>
-    data.map((item) => {
-      if (item.isOtherMonth) return item
-      if (item.isWeekend) return item
-      return {
-        ...item,
-        value: value,
-      }
-    })
-
-  type dayProps = {
-    date: Date
-    value: number | null
-    isToday: boolean
-    isWeekend: boolean
-    isOtherMonth: boolean
-    holiday: string | null
-  }
-
-  const setDayValue = (data: dayProps) => {
-    if (data.value === null) return 1
-    if (data.value === 1) return 0.5
-    if (data.value === 0.5) return 0
-    return null
-  }
-  const onClickHandler = (
-    event: React.MouseEvent<HTMLButtonElement>,
-    day: dayProps
-  ) => {
-    console.log(event)
-    const newCalendar = calendarData?.map((data) => {
+  const onClickHandler = (calendarData: CalendarData) => {
+    const newCalendar = mappedMonth?.map((data) => {
       if (data.isOtherMonth) return data
-      if (isSameDay(data.date, day.date)) {
+      if (isSameDay(data.date, calendarData.date)) {
         return {
-          ...day,
+          ...calendarData,
           value: setDayValue(data),
         }
       }
       return data
     })
-    console.log(newCalendar)
     setCalendarData(newCalendar)
   }
-  console.log('result => ', calendarData)
+
+  const prevMonth = () => {
+    setMonthToDisplayDate((state) => {
+      return subMonths(startOfMonth(state), 1)
+    })
+  }
+  const nextMonth = () => {
+    setMonthToDisplayDate((state) => {
+      return addMonths(startOfMonth(state), 1)
+    })
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <Global
@@ -145,7 +110,7 @@ const Calendar: React.FC<CalendarProps> = ({
               format(truetype) tech(variations);
           }
           * {
-            font-family: inherit, sans-serif;
+            font-family: 'inherit', sans-serif;
           }
         `}
       />
@@ -154,7 +119,7 @@ const Calendar: React.FC<CalendarProps> = ({
           <Button
             color="secondary"
             onClick={() => {
-              const newCalendar = setCalendarValue(calendarData, null)
+              const newCalendar = setCalendarDataValue(calendarData, null)
               return setCalendarData(newCalendar)
             }}
           >
@@ -162,44 +127,27 @@ const Calendar: React.FC<CalendarProps> = ({
           </Button>
           <Button
             onClick={() => {
-              const newCalendar = setCalendarValue(calendarData, 1)
+              const newCalendar = setCalendarDataValue(calendarData, 1)
               return setCalendarData(newCalendar)
             }}
           >
             all 1
           </Button>
         </div>
-        <div className="calendarActionsWrapper">
-          <Button
-            onClick={() =>
-              setMonthYearDate((state) => {
-                console.log(state)
-                return subMonths(startOfMonth(state), 1)
-              })
-            }
-          >
-            {`< Prev`}
-          </Button>
-          <div className="monthYearName">{`${format(monthYearDate, 'MMMM')} ${format(monthYearDate, 'yyyy')}`}</div>
-          <Button
-            onClick={() =>
-              setMonthYearDate((state) => {
-                return addMonths(startOfMonth(state), 1)
-              })
-            }
-          >
-            {`Next >`}
-          </Button>
-        </div>
-        {displayWeekDays && <WeekDays weekStartsOn={weekStartsOn} />}
+
+        <CraHeader
+          calendarData={calendarData}
+          isHolidays={!!holidays}
+          prevMonthFn={prevMonth}
+          nextMonthFn={nextMonth}
+        />
+        {displayWeekDays && <WeekDays firstWeek={calendarData.slice(0, 7)} />}
         <div className="monthWrapper">
-          {calendarData.map((day) => (
+          {calendarData.map((calendarData) => (
             <DayCell
-              key={day.date.toLocaleDateString()}
-              onClick={(event: React.MouseEvent<HTMLButtonElement>) =>
-                onClickHandler(event, day)
-              }
-              dayData={day}
+              key={calendarData.date.toLocaleDateString()}
+              onClick={() => onClickHandler(calendarData)}
+              dayData={calendarData}
             />
           ))}
         </div>

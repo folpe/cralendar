@@ -1,24 +1,17 @@
-import { Day, format } from 'date-fns'
+import { format } from 'date-fns'
 import { StyledWeekDays } from './WeekDays.styles'
-import { weekArrayMaker } from './WeekDays.helpers'
-import { useMemo } from 'react'
+import { CalendarData } from '../../organisms/Calendar/Calendar'
 
 type WeekDaysProps = {
-  weekStartsOn?: Day
+  firstWeek?: CalendarData[]
 }
 
-const WeekDays: React.FC<WeekDaysProps> = ({ weekStartsOn = 1 }) => {
-  const today = new Date()
-  const weekArray = useMemo(
-    () => weekArrayMaker(today, weekStartsOn),
-    [today, weekStartsOn]
-  )
-
+const WeekDays: React.FC<WeekDaysProps> = ({ firstWeek }) => {
   return (
     <StyledWeekDays>
-      {weekArray.map((day) => (
-        <span className="weekDay" key={day.toLocaleDateString()}>
-          {format(day, 'E')}
+      {firstWeek?.map((day: CalendarData) => (
+        <span className="weekDay" key={day.date.toLocaleDateString()}>
+          {format(day.date, 'E')}
         </span>
       ))}
     </StyledWeekDays>

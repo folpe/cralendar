@@ -3,6 +3,7 @@ import { Theme } from '@emotion/react'
 export const theme: Theme = {
   color: {
     primary: {
+      light: 'LightSeaGreen',
       main: 'teal',
     },
     secondary: {

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import { Button } from '../Button'
 
-const borderRadius = '5px'
+const borderRadius = '8px'
 
 const StyledDayCell = styled(Button)`
   &.dayCell {
@@ -26,6 +26,7 @@ const StyledDayCell = styled(Button)`
       flex: 1;
       border-radius: ${borderRadius};
       transition: all 1s ease-out;
+      border: 1px solid transparent;
     }
     & .indicators {
       position: absolute;
@@ -89,7 +90,9 @@ const StyledDayCell = styled(Button)`
     }
     &.empty {
       & .day {
-        background: rgba(0, 0, 0, 0.1);
+        background: transparent;
+        color: ${({ theme }) => theme.color.grey.dark};
+        border: 1px solid ${({ theme }) => theme.color.primary.main};
       }
       & .indicators {
         & .todayMark {
