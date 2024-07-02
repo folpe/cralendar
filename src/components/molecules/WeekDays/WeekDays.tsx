@@ -1,17 +1,15 @@
-import { format } from 'date-fns'
 import { StyledWeekDays } from './WeekDays.styles'
-import { CalendarData } from '../../organisms/Calendar/Calendar'
 
 type WeekDaysProps = {
-  firstWeek?: CalendarData[]
+  weekDayNames: string[]
 }
 
-const WeekDays: React.FC<WeekDaysProps> = ({ firstWeek }) => {
+const WeekDays: React.FC<WeekDaysProps> = ({ weekDayNames }) => {
   return (
     <StyledWeekDays>
-      {firstWeek?.map((day: CalendarData) => (
-        <span className="weekDay" key={day.date.toLocaleDateString()}>
-          {format(day.date, 'E')}
+      {weekDayNames?.map((name: string) => (
+        <span className="weekDay" key={name}>
+          {name}
         </span>
       ))}
     </StyledWeekDays>

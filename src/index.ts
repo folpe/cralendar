@@ -1,1 +1,2 @@
-export { Calendar } from './components'
+export { Cralendar } from './components'
+export type { ExportedData, CalendarData, Holidays } from './components'

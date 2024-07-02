@@ -1,48 +1,54 @@
 import { StyledCraHeader } from './CraHeader.styles'
 import { TotalDays } from '../../atoms/TotalDays'
-import { totalsCalculator } from './CraHeader.helpers'
+import { dateData } from './CraHeader.helpers'
 import { Button } from '../../atoms/Button'
-import { CalendarData } from '../../organisms/Calendar/Calendar'
 
 type CraHeaderProps = {
-  calendarData: CalendarData[]
-  isHolidays?: boolean
-  isPrevNextMonth?: boolean
-  prevMonthFn: () => void
-  nextMonthFn: () => void
+  currentMonthDate: Date
+  totalMonthDays: number
+  totalMonthBusinessDays: number
+  totalMonthHolidays: number
+  totalWorkedDays: number
+  totalRestDays: number
+  displayHolidays?: boolean
+  displayPrevNextMonth?: boolean
+  onChangeMonth: (action: 'previous' | 'next') => void
 }
 
 const CraHeader: React.FC<CraHeaderProps> = ({
-  calendarData,
-  isPrevNextMonth = true,
-  isHolidays = false,
-  prevMonthFn,
-  nextMonthFn,
+  currentMonthDate = new Date(),
+  totalMonthDays = 0,
+  totalMonthBusinessDays = 0,
+  totalMonthHolidays = 0,
+  totalWorkedDays = 0,
+  totalRestDays = 0,
+  displayHolidays = true,
+  displayPrevNextMonth = false,
+  onChangeMonth,
 }) => {
-  const {
-    totalMonthDays,
-    totalMonthBusinessDays,
-    totalMonthHolidays,
-    totalWorkedDays,
-    totalRestDays,
-    monthName,
-    monthNumber,
-  } = totalsCalculator(calendarData)
+  const prevClickHander = () => {
+    onChangeMonth('previous')
+  }
+  const nextClickHander = () => {
+    onChangeMonth('next')
+  }
+
+  const { monthName, yearNumber } = dateData(currentMonthDate)
 
   return (
     <StyledCraHeader>
       <div className="dateWrapper">
-        {isPrevNextMonth && (
-          <Button color="inherit" onClick={prevMonthFn}>
+        {displayPrevNextMonth && (
+          <Button color="inherit" onClick={prevClickHander}>
             {'<'}
           </Button>
         )}
         <div className="date">
           <div className="monthName">{monthName}</div>
-          <div className="yearNumber">{monthNumber}</div>
+          <div className="yearNumber">{yearNumber}</div>
         </div>
-        {isPrevNextMonth && (
-          <Button color="inherit" onClick={nextMonthFn}>
+        {displayPrevNextMonth && (
+          <Button color="inherit" onClick={nextClickHander}>
             {'>'}
           </Button>
         )}
@@ -53,7 +59,7 @@ const CraHeader: React.FC<CraHeaderProps> = ({
           label={'Total'}
           days={totalMonthDays}
         />
-        {isHolidays && (
+        {displayHolidays && (
           <TotalDays
             className="holiDays"
             label={'Fériés'}

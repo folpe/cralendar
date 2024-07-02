@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 
 const StyledCraHeader = styled('div')`
+  width: 100%;
   display: flex;
   background: ${({ theme }) =>
     `linear-gradient(to left, ${theme.color.primary.light} 30%, ${theme.color.primary.main} 70%)`};

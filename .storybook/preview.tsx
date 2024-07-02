@@ -14,7 +14,7 @@ const preview: Preview = {
               src: url('../src/assets/fonts/Raleway-VariableFont_wght.ttf')
                 format(truetype) tech(variations);
             }
-            * {
+            html {
               font-family: 'Raleway-Font';
             }
           `}

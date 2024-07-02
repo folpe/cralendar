@@ -1,17 +1,6 @@
 import styled from '@emotion/styled'
 
 const CalendarWrapper = styled.div`
-  width: 50em;
-
-  & .calendarActionsWrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    & .monthYearName {
-      color: #666;
-    }
-  }
-
   & .monthWrapper {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
