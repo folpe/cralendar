@@ -1,5 +1,7 @@
 # React + TypeScript + Rollup
 
+[![Super-Linter](https://github.com/folpe/cralendar/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+
 This template provides a minimal setup to get React working in Roolup with HMR and some ESLint rules.
 
 ## Expanding the ESLint configuration
