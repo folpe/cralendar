@@ -1,9 +1,7 @@
-name: Release
+name: 🚀 Release
 
 on:
   workflow_dispatch:
-
-permissions: read-all
 
 jobs:
   lint:
@@ -27,14 +25,14 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Release project
-        uses: cycjimmy/semantic-release-action@v3
+        uses: cycjimmy/semantic-release-action@v4
         with:
-          semantic_version: 19.0.5
           branch: main
           extra_plugins: |
             @semantic-release/changelog
             @semantic-release/git
             @semantic-release/npm
         env:
+          RUNNER_DEBUG: 1
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
