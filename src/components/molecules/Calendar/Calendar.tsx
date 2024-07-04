@@ -5,17 +5,15 @@ import { DayCell } from '../../atoms/DayCell'
 import { WeekDays } from '../WeekDays'
 import { format } from 'date-fns'
 
+import React from 'react'
+
 type CalendarProps = {
   calendarData: CalendarData[]
   displayWeekDays?: boolean
   onDayAction: (calendarDataDay: CalendarData) => void
 }
 
-const Calendar: React.FC<CalendarProps> = ({
-  calendarData,
-  displayWeekDays,
-  onDayAction,
-}) => {
+const Calendar: React.FC<CalendarProps> = ({ calendarData, displayWeekDays, onDayAction }) => {
   const dayCellClickHandler = (calendarDataDay: CalendarData) => {
     onDayAction(calendarDataDay)
   }
@@ -28,7 +26,7 @@ const Calendar: React.FC<CalendarProps> = ({
     <CalendarWrapper>
       {displayWeekDays && <WeekDays weekDayNames={weekDayNames} />}
       <div className="monthWrapper">
-        {calendarData.map((calendarDataDay) => (
+        {calendarData.map(calendarDataDay => (
           <DayCell
             key={calendarDataDay.date.toLocaleDateString()}
             onClick={() => dayCellClickHandler(calendarDataDay)}

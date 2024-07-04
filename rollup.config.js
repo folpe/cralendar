@@ -3,27 +3,26 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import terser from '@rollup/plugin-terser'
-import packagejson from './package.json' assert { type: 'json' }
 
 export default {
   input: 'src/index.ts',
   output: [
     {
-      file: packagejson.main,
+      file: 'dist/cjs/index.js',
       format: 'cjs',
-      sourcemap: true,
+      sourcemap: true
     },
     {
-      file: packagejson.module,
+      file: 'dist/esm/index.js',
       format: 'esm',
-      sourcemap: true,
-    },
+      sourcemap: true
+    }
   ],
   plugins: [
     peerDepsExternal(),
     resolve(),
     commonjs(),
     typescript({ tsconfig: './tsconfig.json' }),
-    terser(),
-  ],
+    terser()
+  ]
 }

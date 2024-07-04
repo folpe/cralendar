@@ -1,6 +1,7 @@
 import { format } from 'date-fns'
 import { StyledDayCell } from './DayCell.styles'
 import classNames from 'classnames'
+import React from 'react'
 
 interface DayData {
   date: Date
@@ -23,7 +24,7 @@ const DayCell: React.FC<DayCellProps> = ({ dayData, onClick }) => {
     holiday: dayData.holiday,
     active: dayData.value === 1,
     'active half': dayData.value === 0.5,
-    'active empty': dayData.value === 0,
+    'active empty': dayData.value === 0
   })
 
   const isDisabled = dayData.isWeekend || dayData.isOtherMonth
@@ -38,9 +39,7 @@ const DayCell: React.FC<DayCellProps> = ({ dayData, onClick }) => {
       <span className="day">{format(dayData.date, 'dd')}</span>
       <div className="indicators">
         {dayData.isToday && <span className="todayMark"></span>}
-        {dayData.holiday && (
-          <span className="holidayMark" title={dayData.holiday}></span>
-        )}
+        {dayData.holiday && <span className="holidayMark" title={dayData.holiday}></span>}
       </div>
     </StyledDayCell>
   )

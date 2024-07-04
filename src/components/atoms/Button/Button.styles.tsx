@@ -1,8 +1,8 @@
 import styled from '@emotion/styled'
-import { ButtonProps } from './Button'
+import type { ButtonProps } from './Button'
 
 const StyledButton = styled('button')<ButtonProps>(
-  (props) => `
+  props => `
   display: flex;
   align-items: center;
   justify-content: center;
