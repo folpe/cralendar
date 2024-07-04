@@ -3,7 +3,7 @@ import commonjs from '@rollup/plugin-commonjs'
 import typescript from '@rollup/plugin-typescript'
 import peerDepsExternal from 'rollup-plugin-peer-deps-external'
 import terser from '@rollup/plugin-terser'
-import packagejson from './package.json' assert { type: 'json' }
+import packagejson from './package.json'
 
 export default {
   input: 'src/index.ts',
