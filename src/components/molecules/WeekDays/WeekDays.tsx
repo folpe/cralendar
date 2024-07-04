@@ -1,3 +1,4 @@
+import React from 'react'
 import { StyledWeekDays } from './WeekDays.styles'
 
 type WeekDaysProps = {

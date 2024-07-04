@@ -1,11 +1,4 @@
-import {
-  addMonths,
-  Day,
-  isSameDay,
-  setDefaultOptions,
-  startOfMonth,
-  subMonths,
-} from 'date-fns'
+import { addMonths, Day, isSameDay, setDefaultOptions, startOfMonth, subMonths } from 'date-fns'
 import { fr } from 'date-fns/locale'
 import { useEffect, useMemo, useState } from 'react'
 
@@ -20,11 +13,12 @@ import {
   monthMapper,
   monthStartEndMapper,
   setDayValue,
-  totalsCalculator,
+  totalsCalculator
 } from './Cralendar.helpers'
 import { CraHeader } from '../../molecules/CraHeader'
 import { setCalendarDataValue } from './Cralendar.helpers'
 import { CralendarWrapper } from './Cralendar.styles'
+import React from 'react'
 
 setDefaultOptions({ locale: fr })
 export interface CalendarData {
@@ -76,17 +70,14 @@ const Cralendar: React.FC<CralendarProps> = ({
   displayWeekDays = true,
   displayPrevNext = true,
   holidays,
-  onCalendarChange,
+  onCalendarChange
 }) => {
   const [calendarData, setCalendarData] = useState<CalendarData[]>([])
   const [monthToDisplayDate, setMonthToDisplayDate] = useState<Date>(date)
   const mappedMonth = useMemo(
     () =>
       monthMapper(
-        monthByWeeksDaysMapper(
-          monthStartEndMapper(monthToDisplayDate),
-          weekStartsOn
-        ),
+        monthByWeeksDaysMapper(monthStartEndMapper(monthToDisplayDate), weekStartsOn),
         holidays!,
         monthToDisplayDate
       ),
@@ -111,7 +102,7 @@ const Cralendar: React.FC<CralendarProps> = ({
   }, [calendarData])
 
   const onChangeMonth = (action: 'previous' | 'next') => {
-    setMonthToDisplayDate((state) => {
+    setMonthToDisplayDate(state => {
       return action === 'previous'
         ? subMonths(startOfMonth(state), 1)
         : addMonths(startOfMonth(state), 1)
@@ -119,12 +110,12 @@ const Cralendar: React.FC<CralendarProps> = ({
   }
 
   const onDayAction = (calendarDataDay: CalendarData) => {
-    const updatedCalendar = calendarData?.map((data) => {
+    const updatedCalendar = calendarData?.map(data => {
       if (data.isOtherMonth) return data
       if (isSameDay(data.date, calendarDataDay.date)) {
         return {
           ...calendarDataDay,
-          value: setDayValue(data),
+          value: setDayValue(data)
         }
       }
       return data
@@ -133,7 +124,7 @@ const Cralendar: React.FC<CralendarProps> = ({
   }
 
   const onBoostAction = (action: 'reset' | 'full' | 'rest') => {
-    setCalendarData((state) => setCalendarDataValue(state, action))
+    setCalendarData(state => setCalendarDataValue(state, action))
   }
 
   return (

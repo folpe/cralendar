@@ -1,4 +1,5 @@
 import { TotalDaysBase } from './TotalDays.styles'
+import React from 'react'
 
 type TotalDaysProps = {
   label: string

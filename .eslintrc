@@ -1,0 +1,11 @@
+{
+  "files": ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+  "parserOptions": {
+    "ecmaFeatures": { "jsx": true }
+  },
+  "extends": [
+    "plugin:@eslint/js/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "eslint-plugin-react/configs/recommended"
+  ]
+}

@@ -1,5 +1,7 @@
 import { Button } from '../../atoms/Button'
 import { StyledBoostersWrapper } from './Boosters.styles'
+import React from 'react'
+
 type BoostersType = {
   onBoostAction: (action: 'reset' | 'full' | 'rest') => void
 }

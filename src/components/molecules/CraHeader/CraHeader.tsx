@@ -2,6 +2,7 @@ import { StyledCraHeader } from './CraHeader.styles'
 import { TotalDays } from '../../atoms/TotalDays'
 import { dateData } from './CraHeader.helpers'
 import { Button } from '../../atoms/Button'
+import React from 'react'
 
 type CraHeaderProps = {
   currentMonthDate: Date
@@ -24,7 +25,7 @@ const CraHeader: React.FC<CraHeaderProps> = ({
   totalRestDays = 0,
   displayHolidays = true,
   displayPrevNextMonth = false,
-  onChangeMonth,
+  onChangeMonth
 }) => {
   const prevClickHander = () => {
     onChangeMonth('previous')
@@ -54,28 +55,12 @@ const CraHeader: React.FC<CraHeaderProps> = ({
         )}
       </div>
       <div className="totalsWrapper">
-        <TotalDays
-          className="totalDays"
-          label={'Total'}
-          days={totalMonthDays}
-        />
+        <TotalDays className="totalDays" label={'Total'} days={totalMonthDays} />
         {displayHolidays && (
-          <TotalDays
-            className="holiDays"
-            label={'Fériés'}
-            days={totalMonthHolidays}
-          />
+          <TotalDays className="holiDays" label={'Fériés'} days={totalMonthHolidays} />
         )}
-        <TotalDays
-          className="businessDays"
-          label={'Ouvrés'}
-          days={totalMonthBusinessDays}
-        />
-        <TotalDays
-          className="workedDays"
-          label={'Travaillés'}
-          days={totalWorkedDays}
-        />
+        <TotalDays className="businessDays" label={'Ouvrés'} days={totalMonthBusinessDays} />
+        <TotalDays className="workedDays" label={'Travaillés'} days={totalWorkedDays} />
         <TotalDays className="restDays" label={'Repos'} days={totalRestDays} />
       </div>
     </StyledCraHeader>

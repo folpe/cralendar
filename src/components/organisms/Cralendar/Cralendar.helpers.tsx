@@ -11,13 +11,9 @@ import {
   isToday,
   isWeekend,
   startOfMonth,
-  startOfWeek,
+  startOfWeek
 } from 'date-fns'
-import {
-  Holidays,
-  CalendarData,
-  Metadata,
-} from '../../organisms/Cralendar/Cralendar'
+import { Holidays, CalendarData, Metadata } from '../../organisms/Cralendar/Cralendar'
 
 const setHoliday = (holidaysArr: { [key: string]: string }, dayDate: Date) => {
   if (!holidaysArr) return null
@@ -28,40 +24,33 @@ const setHoliday = (holidaysArr: { [key: string]: string }, dayDate: Date) => {
   return isHoliday ? holidaysArr[formatedDayDate] : null
 }
 
-export const weekStartEndMapper = (day: Date, weekStartsOn: Number) => ({
+export const weekStartEndMapper = (day: Date, weekStartsOn: number) => ({
   start: startOfWeek(day, {
-    weekStartsOn: weekStartsOn as Day,
+    weekStartsOn: weekStartsOn as Day
   }),
   end: endOfWeek(day, {
-    weekStartsOn: weekStartsOn as Day,
-  }),
+    weekStartsOn: weekStartsOn as Day
+  })
 })
 
 export const monthStartEndMapper = (monthToDisplayDate: Date) => ({
   start: startOfMonth(monthToDisplayDate),
-  end: endOfMonth(monthToDisplayDate),
+  end: endOfMonth(monthToDisplayDate)
 })
 
-export const monthByWeeksDaysMapper = (
-  monthStartEnd: Interval<Date>,
-  weekStartsOn: number
-) =>
-  eachWeekOfInterval(monthStartEnd).flatMap((weekDay) =>
+export const monthByWeeksDaysMapper = (monthStartEnd: Interval<Date>, weekStartsOn: number) =>
+  eachWeekOfInterval(monthStartEnd).flatMap(weekDay =>
     eachDayOfInterval(weekStartEndMapper(weekDay, weekStartsOn))
   )
 
-export const monthMapper = (
-  monthDaysArr: Date[],
-  holidays: Holidays,
-  monthYearDate: Date
-) => {
-  return monthDaysArr.map((dayDate) => ({
+export const monthMapper = (monthDaysArr: Date[], holidays: Holidays, monthYearDate: Date) => {
+  return monthDaysArr.map(dayDate => ({
     date: dayDate,
     value: null,
     isToday: isToday(dayDate),
     isWeekend: isWeekend(dayDate),
     isOtherMonth: !isSameMonth(monthYearDate, dayDate),
-    holiday: setHoliday(holidays!, dayDate),
+    holiday: setHoliday(holidays!, dayDate)
   }))
 }
 export const setDayValue = (data: CalendarData) => {
@@ -80,32 +69,29 @@ export const setCalendarDataValue: (
     const matrix = {
       full: 1,
       rest: 0,
-      reset: null,
+      reset: null
     }
 
     return matrix[action!] ?? defaultValue
   }
 
-  return state.map((item) => {
+  return state.map(item => {
     if (item.isOtherMonth) return item
     if (item.isWeekend) return item
     if ((item.value || item.value === 0) && action !== 'reset') return item
     return {
       ...item,
-      value: transformActionToValue(action),
+      value: transformActionToValue(action)
     }
   })
 }
 
-export const exportedDataMapper = (
-  calendarData: CalendarData[],
-  metaData: Metadata
-) => {
+export const exportedDataMapper = (calendarData: CalendarData[], metaData: Metadata) => {
   const calendarValues = calendarData
-    .filter((data) => !data.isOtherMonth && !data.isWeekend)
-    .map((item) => ({
+    .filter(data => !data.isOtherMonth && !data.isWeekend)
+    .map(item => ({
       date: item.date,
-      value: item.value,
+      value: item.value
     }))
 
   return { metadata: metaData, calendarValues }
@@ -122,23 +108,17 @@ export const totalsCalculator = (calendarData: CalendarData[]) => {
     (calendarData: CalendarData) => !isWeekend(calendarData.date)
   ).length
   const totalMonthHolidays = currentMonthData?.filter(
-    (calendarData: CalendarData) =>
-      calendarData.holiday && !calendarData.isOtherMonth
+    (calendarData: CalendarData) => calendarData.holiday && !calendarData.isOtherMonth
   ).length
   const totalWorkedDays = currentMonthData?.reduce(
     (acc: number, calendarData: CalendarData) => acc + calendarData.value!,
     0
   )
   const totalRestDays =
-    currentMonthData?.filter(
-      (calendarData: CalendarData) => calendarData.value === 0
-    ).length +
+    currentMonthData?.filter((calendarData: CalendarData) => calendarData.value === 0).length +
     currentMonthData
       ?.filter((calendarData: CalendarData) => calendarData.value === 0.5)
-      .reduce(
-        (acc: number, calendarData: CalendarData) => acc + calendarData.value!,
-        0
-      )
+      .reduce((acc: number, calendarData: CalendarData) => acc + calendarData.value!, 0)
 
   const deltaDays = -totalMonthBusinessDays + (totalWorkedDays + totalRestDays)
   return {
@@ -148,6 +128,6 @@ export const totalsCalculator = (calendarData: CalendarData[]) => {
     totalMonthHolidays,
     totalWorkedDays,
     totalRestDays,
-    deltaDays,
+    deltaDays
   }
 }
