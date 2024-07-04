@@ -61,7 +61,7 @@ jobs:
       - name: Check branch name conventions
         uses: AlbertHernandez/branch-name-action@v1.0.2
         with:
-          branch_pattern: 'feature|fix|build|ci|docs|style|refactor|perf|test|chore'
+          branch_pattern: 'feat|fix|build|ci|docs|style|refactor|perf|test|chore'
           comment_for_invalid_branch_name: |
             🙋‍ Oops! This branch name does not follow the naming convention.
 
@@ -71,7 +71,7 @@ jobs:
 
             Branch naming convention | Purpose
             ------------------------ | -------
-            `feature/**`                | A new feature
+            `feat/**`                | A new feature
             `fix/**`                 | A bug fix
             `build/**`               | Changes that affect the build system (npm, mavem, poetry)
             `ci/**`                  | Changes to the CI configuration
