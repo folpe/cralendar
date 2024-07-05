@@ -3,9 +3,9 @@
 ![NPM Version](https://img.shields.io/npm/v/%40folpe%2Fcralendar)
 ![NPM License](https://img.shields.io/npm/l/%40folpe%2Fcralendar)
 
-[![Super-Linter](https://github.com/folpe/cralendar/actions/workflows/linter.yml/badge.svg)](https://github.com/marketplace/actions/super-linter)
+[![🚀 Release](https://github.com/folpe/cralendar/actions/workflows/release.yml/badge.svg)](https://github.com/folpe/cralendar/actions/workflows/release.yml)
 
-[Description component]
+A simple calendar to manage CRA (Compte Rendu Activité)
 
 ## Installation
 
@@ -18,9 +18,10 @@ npm install --save @folpe/cralendar
 ## Usage
 
 ```tsx
+import React from 'react'
 import { Calendar } from '@folpe/cralendar'
 
-const Main = () => {
+const App = () => {
   return (
     <div>
       <Calendar />
@@ -29,14 +30,28 @@ const Main = () => {
 }
 ```
 
-### Customization
+## Documentation
 
-coming soon
+Coming soon
 
-- **Description**: Replace `[Concise description of the component]` with a succinct and informative description of your component.
-- **Installation**: Customize the installation command according to the name of your npm component (`my-component` in the example).
-- **Usage**: Provide specific code examples for your component to help users get started quickly.
-- **API**: Describe the classes, functions, methods, and properties exposed by your component. Adapt this section based on your code structure.
-- **Examples**: Add additional examples of using your component if necessary.
-- **Contributing**: Define how contributors can get involved in your project, such as guidelines for submitting pull requests and issues.
-- **License**: Specify the license under which you are releasing your component.
+Props to use
+
+```tsx
+type CralendarProps = {
+  date?: Date
+  weekStartsOn?: number
+  displayBoosterActions?: boolean
+  displayWeekDays?: boolean
+  displayPrevNext?: boolean
+  holidays?: Holidays
+  onCalendarChange: (data: ExportedData) => void
+}
+```
+
+## Contribute
+
+Show your ❤️ and support by giving a ⭐. Any suggestions are welcome!
+
+## License
+
+Licensed under MIT
