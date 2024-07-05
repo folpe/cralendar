@@ -1,3 +1,12 @@
+# @folpe/cralendar changelog
+
+## [1.1.2](https://github.com/folpe/cralendar/compare/v1.1.1...v1.1.2) (2024-07-05)
+
+
+### Bug Fixes
+
+* **configs:** update configs files ([72739e5](https://github.com/folpe/cralendar/commit/72739e5f2eef33687f35e8a2d11077d8b2c6870d))
+
 @folpe/cralendar changelog
 
 ## [1.1.1](https://github.com/folpe/cralendar/compare/v1.1.0...v1.1.1) (2024-07-05)
