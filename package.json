@@ -1,7 +1,7 @@
 {
   "name": "@folpe/cralendar",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
