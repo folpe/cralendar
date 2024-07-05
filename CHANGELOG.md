@@ -1,5 +1,12 @@
 @folpe/cralendar changelog
 
+## [1.1.1](https://github.com/folpe/cralendar/compare/v1.1.0...v1.1.1) (2024-07-05)
+
+
+### Bug Fixes
+
+* **editor:** fix editor lint ([c3edc0d](https://github.com/folpe/cralendar/commit/c3edc0d80762ed633ef9267f3c83dee3ca2a88ec))
+
 # [1.1.0](https://github.com/folpe/cralendar/compare/v1.0.0...v1.1.0) (2024-07-05)
 
 
