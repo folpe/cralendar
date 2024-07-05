@@ -1,11 +1,20 @@
 {
-  "files": ["**/*.{js,mjs,cjs,ts,jsx,tsx}"],
+  "root": true,
+
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:react/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": { "jsx": true }
   },
-  "extends": [
-    "plugin:@eslint/js/recommended",
-    "plugin:@typescript-eslint/recommended",
-    "eslint-plugin-react/configs/recommended"
-  ]
+  "plugins": ["react", "@typescript-eslint"],
+  "settings": {
+    "react": {
+      "version": "detect" // Cette ligne spécifie la version de React
+    }
+  },
+  "ignorePatterns": ["license"]
 }

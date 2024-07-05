@@ -1,6 +1,14 @@
 {
   "name": "@folpe/cralendar",
   "version": "1.1.1",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/folpe/cralendar.git"
+  },
+  "author": "Florent PELLEGRIN  <contact@folpe.me> (https://github.com/folpe)",
+  "bugs": {
+    "url": "https://github.com/folpe/cralendar/issues"
+  },
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",

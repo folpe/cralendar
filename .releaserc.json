@@ -23,7 +23,7 @@
     ],
     [
       "@semantic-release/changelog",
-      { "changelogFile": "CHANGELOG.md", "changelogTitle": "@folpe/cralendar changelog" }
+      { "changelogFile": "CHANGELOG.md", "changelogTitle": "# @folpe/cralendar changelog" }
     ],
     ["@semantic-release/npm", { "npmPublish": true, "tarballDir": "./" }],
     [
