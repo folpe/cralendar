@@ -1,5 +1,12 @@
 # @folpe/cralendar changelog
 
+## [1.1.3](https://github.com/folpe/cralendar/compare/v1.1.2...v1.1.3) (2024-07-05)
+
+
+### Bug Fixes
+
+* **release:** add pnpm to release action ([78fcf63](https://github.com/folpe/cralendar/commit/78fcf632c0e83746d13888a1237866d478239bdb))
+
 ## [1.1.2](https://github.com/folpe/cralendar/compare/v1.1.1...v1.1.2) (2024-07-05)
 
 
