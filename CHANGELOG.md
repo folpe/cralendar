@@ -1,5 +1,12 @@
 # @folpe/cralendar changelog
 
+## [1.1.4](https://github.com/folpe/cralendar/compare/v1.1.3...v1.1.4) (2024-07-05)
+
+
+### Bug Fixes
+
+* **package:** add description to package ([229d282](https://github.com/folpe/cralendar/commit/229d2827ea8ae141f6cdd6ddabcb5ac32cc2ef27))
+
 ## [1.1.3](https://github.com/folpe/cralendar/compare/v1.1.2...v1.1.3) (2024-07-05)
 
 
