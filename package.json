@@ -6,6 +6,10 @@
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
   "type": "module",
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/",
+    "tag": "latest"
+  },
   "scripts": {
     "build": "rollup -c",
     "storybook": "storybook dev -p 6006",
@@ -44,6 +48,7 @@
     "@storybook/test": "^8.0.5",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
+    "conventional-changelog-conventionalcommits": "^8.0.0",
     "eslint": "8.x",
     "eslint-plugin-react": "^7.34.3",
     "globals": "^15.8.0",
