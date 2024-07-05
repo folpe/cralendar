@@ -1,5 +1,12 @@
 # @folpe/cralendar changelog
 
+## [1.1.5](https://github.com/folpe/cralendar/compare/v1.1.4...v1.1.5) (2024-07-05)
+
+
+### Bug Fixes
+
+* **package:** update main and module path ([9614381](https://github.com/folpe/cralendar/commit/9614381d0e00e8ec774b9fe61513534e2b1a4de0))
+
 ## [1.1.4](https://github.com/folpe/cralendar/compare/v1.1.3...v1.1.4) (2024-07-05)
 
 
