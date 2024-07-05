@@ -1,5 +1,12 @@
 @folpe/cralendar changelog
 
+# [1.1.0](https://github.com/folpe/cralendar/compare/v1.0.0...v1.1.0) (2024-07-05)
+
+
+### Features
+
+* **readme:** update readme ([01d1845](https://github.com/folpe/cralendar/commit/01d18454030441fce6db23493d8777684395768a))
+
 # 1.0.0 (2024-07-05)
 
 ### Bug Fixes
