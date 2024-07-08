@@ -1,5 +1,12 @@
 # @folpe/cralendar changelog
 
+# [1.2.0](https://github.com/folpe/cralendar/compare/v1.1.5...v1.2.0) (2024-07-08)
+
+
+### Features
+
+* **legends:** update legends in french ([f8f04e5](https://github.com/folpe/cralendar/commit/f8f04e5761ce87a2946c6c4853c2c6538d1c5b76))
+
 ## [1.1.5](https://github.com/folpe/cralendar/compare/v1.1.4...v1.1.5) (2024-07-05)
 
 
