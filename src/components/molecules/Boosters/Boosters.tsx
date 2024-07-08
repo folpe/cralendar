@@ -34,15 +34,15 @@ const Boosters: React.FC<BoostersType> = ({ onBoostAction }) => {
       <div className="legendsWrapper">
         <div className="legend">
           <div className="legendBox worked"></div>
-          <label>Worked Day</label>
+          <label>Travaillé</label>
         </div>
         <div className="legend">
           <div className="legendBox half"></div>
-          <label>Half Worked Day</label>
+          <label>Demie-journée</label>
         </div>
         <div className="legend">
           <div className="legendBox rested"></div>
-          <label>Rested Day</label>
+          <label>Repos</label>
         </div>
       </div>
     </StyledBoostersWrapper>
