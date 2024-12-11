@@ -89,5 +89,7 @@ Please make sure to update tests as appropriate.
 ## License
 
 Cralendar is licensed under the MIT License.
+
 See the LICENSE file for details.
+
 Show your ❤️ and support by giving a ⭐. Any suggestions are welcome!
